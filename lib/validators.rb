@@ -5,7 +5,7 @@ module Validators
     not_empty_result = NOT_EMPTY.call(name, value)
     return not_empty_result if not_empty_result != true
 
-    value.include?(' ') ? true : "Введите хотя бы два слово в поле `#{name}`"
+    value.include?(' ') ? true : "Введите хотя бы два слова в поле `#{name}`"
   end
   EXISTS_STATUS = lambda do |_, value, all_statuses|
     all_statuses.include?(value) ? true : 'Выбран статус, которого уже нет в базе данных'
