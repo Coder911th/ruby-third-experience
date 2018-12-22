@@ -39,6 +39,19 @@ class RecordSet
     self
   end
 
+  def edit(id, new_record)
+    @records[id] = new_record
+    self
+  end
+
+  def size
+    @records.size
+  end
+
+  def at(index)
+    @records[index]
+  end
+
   def save
     CSV.open(Constants::PATH_TO_DATABASE, 'wb') { |file| @records.each { |record| file << record.to_a } }
   end

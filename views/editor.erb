@@ -17,7 +17,8 @@
             class="form-control"
             name="full_name"
             placeholder="Введите ФИО"
-            value="<%= record.full_name if defined? record %>">
+            value="<%= record.full_name if defined? record %>"
+            <%= new ? '' : 'readonly' %>>
       </div>
       <div class="row">
         <div class="col-md-6 col-xs-12">
@@ -63,7 +64,8 @@
             class="form-control"
             name="status"
             placeholder="Введите статус"
-            value="<%= record.status  if defined? record %>">
+            value="<%= record.status  if defined? record %>"
+            <%= new ? '' : 'readonly' %>>
       </div>
       <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
