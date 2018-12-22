@@ -1,0 +1,43 @@
+<div class="d-flex align-items-center justify-content-between">
+  <h1>Записная книжка</h1>
+  <div>
+    <a class="btn btn-success" href="add">+ Добавить</a>
+    <a class="btn btn-warning" href="create-event">Создать событие</a>
+  </div>
+</div>
+<% if records.to_a.empty? %>
+  <p class="lead">
+    Нет ни одной записи
+  </p>
+<% else %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ФИО</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Мобильный</th>
+        <th scope="col">Домашний</th>
+        <th scope="col">Адрес</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% hash = records.hash %>
+      <% records.each_with_index do |record, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= record.full_name %></td>
+          <td><%= record.status %></td>
+          <td><%= record.mobile %></td>
+          <td><%= record.phone %></td>
+          <td><%= record.address %></td>
+          <td>
+            <a class="btn btn-primary btn-sm" href="edit/<%= index %>/<%= hash %>"><i class="fas fa-edit"></i></a>
+            <a class="btn btn-danger btn-sm" href="remove/<%= index %>/<%= hash %>"><i class="fas fa-trash"></i></a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
