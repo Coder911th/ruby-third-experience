@@ -20,7 +20,7 @@ module InputChecker
     id = id.to_i
     error_message = 'Передан недопустимый идентификатор записи' if id < 0 || id >= records.size
 
-    if error_message.nil?
+    if !error_message.nil?
       return erb :alert, locals: {
         type: 'danger',
         message: error_message
@@ -33,7 +33,7 @@ module InputChecker
     result_hash_checking = check_hash(params, records)
     return result_hash_checking if result_hash_checking != true
 
-    result_id_checking = check_id(records, id)
+    result_id_checking = check_id(id, records)
     return result_id_checking if result_id_checking != true
 
     true
