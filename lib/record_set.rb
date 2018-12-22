@@ -34,6 +34,11 @@ class RecordSet
     self
   end
 
+  def remove_by_index(id)
+    @records.delete_at(id)
+    self
+  end
+
   def save
     CSV.open(Constants::PATH_TO_DATABASE, 'wb') { |file| @records.each { |record| file << record.to_a } }
   end

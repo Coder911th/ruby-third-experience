@@ -23,3 +23,24 @@ post '/add' do
   RecordSet.read_from_db.add(new_record).save
   redirect to('/')
 end
+
+get '/remove/:id/:hash' do
+  records = RecordSet.read_from_db
+  if params['hash'] != records.hash
+    return erb :alert, locals: {
+      type: 'danger',
+      message: 'Не удалось удалить запись, набор данных был изменён в другом окне'
+    }
+  end
+
+  id = params['id'].strip
+  if id.to_i.to_s != id
+    return erb :alert, locals: {
+      type: 'danger',
+      message: 'Не удалось удалить запись, передайте число в качестве идентификатора'
+    }
+  end
+
+  records.remove_by_index(id.to_i).save
+  redirect to('/')
+end
