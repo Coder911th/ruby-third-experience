@@ -1,6 +1,7 @@
 require 'csv'
 require 'English'
 require 'digest'
+require 'set'
 require_relative 'record'
 require_relative 'constants'
 
@@ -60,5 +61,9 @@ class RecordSet
     data = ''
     @records.each { |record| data += record.to_s }
     Digest::MD5.hexdigest(data)
+  end
+
+  def all_statuses
+    Set.new(@records.map(&:status))
   end
 end

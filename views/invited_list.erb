@@ -1,0 +1,7 @@
+<%= erb :alert, locals: { type: 'success', message: 'Сообщения успешно созданы' } %>
+<ul class="list-group">
+  <li class="list-group-item active">Список приглашенных</li>
+  <% receivers.each do |receiver| %>
+    <li class="list-group-item"><%= receiver.full_name %></li>
+  <% end %>
+</ul>

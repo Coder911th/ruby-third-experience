@@ -1,4 +1,5 @@
 require 'sinatra'
+require_relative 'lib/event'
 require_relative 'lib/record_set'
 require_relative 'lib/input_checker'
 
@@ -52,4 +53,46 @@ post '/edit/:id/:hash' do
 
   RecordSet.read_from_db.edit(id.to_i, new_record).save
   redirect to('/')
+end
+
+get '/create-event' do
+  statuses = RecordSet.read_from_db.all_statuses
+  if statuses.empty?
+    return erb :alert, locals: {
+      type: 'danger',
+      message: 'В записной книжке нет ни одной записи'
+    }
+  end
+  erb :event_creator, locals: { statuses: statuses }
+end
+
+post '/create-event' do
+  event = Event.from_hash(params)
+  records = RecordSet.read_from_db
+  statuses = records.all_statuses
+  checking_result = event.validate_fields(statuses)
+
+  if statuses.empty?
+    return erb :alert, locals: {
+      type: 'danger',
+      message: 'В записной книжке нет ни одной записи'
+    }
+  end
+
+  if checking_result != true
+    return erb :event_creator, locals: {
+      statuses: statuses,
+      error_message: checking_result,
+      event: event
+    }
+  end
+
+  begin
+    erb :invited_list, locals: { receivers: event.create_messages(records) }
+  rescue Errno::EEXIST
+    erb :alert, locals: {
+      type: 'danger',
+      message: "Событие `#{event.name}` уже существует"
+    }
+  end
 end

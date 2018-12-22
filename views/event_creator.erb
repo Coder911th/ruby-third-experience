@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Создание события</h2>
+      <a class="btn btn-dark btn-sm" href="/">Назад</a>
+    </div>
+    <% if defined? error_message %>
+      <div class="alert alert-danger">
+        <%= error_message %>
+      </div>
+    <% end %>
+    <form method="post">
+      <div class="form-group">
+        <label>Название события</label>
+        <input
+            type="text"
+            class="form-control"
+            name="name"
+            placeholder="Введите название события"
+            value="<%= event.name if defined? event %>">
+      </div>
+      <div class="form-group">
+        <label>Выберите статус получателей</label>
+        <select name="status" class="custom-select">
+          <% statuses.each do |status| %>
+            <option value="<%= status %>" <%= (event.status == status ? 'selected' : '') if defined? event %>><%= status %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Текст сообщения</label>
+        <textarea
+            name="message"
+            class="form-control"
+            rows="5"><%= event.message if defined? event %></textarea>
+      </div>
+      <div class="form-check form-group">
+        <input
+            id="need_insert_address"
+            name="need_insert_address"
+            class="form-check-input"
+            type="checkbox"
+            value="on"
+            <%= (event.need_insert_address ? 'checked' : '') if defined? event %>>
+        <label class="form-check-label" for="need_insert_address">
+          Вставить адрес получателя в начало письма
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">Создать пришлашения</button>
+    </form>
+  </div>
+</div>

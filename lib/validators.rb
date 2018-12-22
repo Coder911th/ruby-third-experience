@@ -7,9 +7,12 @@ module Validators
 
     value.include?(' ') ? true : "Введите хотя бы два слово в поле `#{name}`"
   end
+  EXISTS_STATUS = lambda do |_, value, all_statuses|
+    all_statuses.include?(value) ? true : 'Выбран статус, которого уже нет в базе данных'
+  end
 
-  def self.check(name, value, validator)
-    result = validator.call(name, value)
+  def self.check(name, value, validator, meta = nil)
+    result = meta.nil? ? validator.call(name, value) : validator.call(name, value, meta)
     raise Validators::Error, result if result != true
 
     true
