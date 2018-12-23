@@ -88,7 +88,6 @@ RSpec.describe Event do
     before do
       @event = Event.new('Тестовое событие', 'Коллега', 'Добрый день!', true)
       @event_folder = File.expand_path("#{Constants::PATH_TO_DATA}/#{@event.name}")
-      FileUtils.rm_rf(@event_folder)
       @records = RecordSet.new
       @record = Record.from_hash(
         'full_name' => 'Ложкин Дмитрий Николаевич',
@@ -98,6 +97,7 @@ RSpec.describe Event do
         'status' => 'Коллега'
       )
       @records.add(@record)
+      FileUtils.rm_rf(@event_folder) if File.exist?(@event_folder)
     end
 
     it 'should create messages' do
@@ -107,7 +107,7 @@ RSpec.describe Event do
     end
 
     after do
-      FileUtils.rm_rf(File.expand_path("#{Constants::PATH_TO_DATA}/Тестовое событие/*"))
+      FileUtils.rm_rf(@event_folder) if File.exist?(@event_folder)
     end
   end
 end
