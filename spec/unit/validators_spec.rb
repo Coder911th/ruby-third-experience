@@ -27,7 +27,9 @@ RSpec.describe Validators do
     end
 
     it 'should throw error (EXISTS_STATUS)' do
-      expect { Validators.check('Статус', 'Друг', Validators::EXISTS_STATUS, %w[Коллега Знакомый]) }.to raise_error(Validators::Error)
+      expect { Validators.check('Статус', 'Друг', Validators::EXISTS_STATUS, %w[Коллега Знакомый]) }.to raise_error(
+        Validators::Error
+      )
     end
   end
 end

@@ -49,7 +49,9 @@ RSpec.describe Record do
     end
 
     it 'should fail validation by status (empty string)' do
-      expect(Record.new('Ложкин Дмитрий', '', '11-22-33', '', '').validate_fields).to eq('Поле `Статус` обязательно для заполнения')
+      expect(Record.new('Ложкин Дмитрий', '', '11-22-33', '', '').validate_fields).to eq(
+        'Поле `Статус` обязательно для заполнения'
+      )
     end
   end
 
