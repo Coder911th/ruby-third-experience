@@ -56,6 +56,14 @@ RSpec.describe RecordSet do
     end
   end
 
+  context '#each' do
+    it 'should look each record' do
+      statuses = []
+      @records.add(@record).add(@secord_record).each { |record| statuses.append(record.status) }
+      expect(statuses).to eq(%w[Коллега Знакомый])
+    end
+  end
+
   context 'testing database' do
     before do
       File.open(Constants::PATH_TO_DATABASE, 'w') do |file|
