@@ -55,6 +55,7 @@ class RecordSet
 
   def save
     CSV.open(Constants::PATH_TO_DATABASE, 'wb') { |file| @records.each { |record| file << record.to_a } }
+    self
   end
 
   def hash
