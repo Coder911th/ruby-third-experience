@@ -96,3 +96,17 @@ post '/create-event' do
     }
   end
 end
+
+get '/sort-by-name' do
+  erb :list, locals: {
+    header: 'Записи отсортированы по имени',
+    records: RecordSet.read_from_db.sort_by(&:full_name)
+  }
+end
+
+get '/sort-by-status' do
+  erb :list, locals: {
+    header: 'Записи отсортированы по статусу',
+    records: RecordSet.read_from_db.sort_by(&:status)
+  }
+end

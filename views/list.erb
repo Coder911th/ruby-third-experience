@@ -1,0 +1,29 @@
+<div class="d-flex align-items-center justify-content-between">
+  <h1><%= header %></h1>
+  <div>
+    <a class="btn btn-dark btn-sm" href="/">Назад</a>
+  </div>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ФИО</th>
+      <th scope="col">Статус</th>
+      <th scope="col">Мобильный</th>
+      <th scope="col">Домашний</th>
+      <th scope="col">Адрес</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% hash = records.hash %>
+    <% records.each do |record| %>
+      <tr>
+        <td><%= record.full_name %></td>
+        <td><%= record.status %></td>
+        <td><%= record.mobile %></td>
+        <td><%= record.phone %></td>
+        <td><%= record.address %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

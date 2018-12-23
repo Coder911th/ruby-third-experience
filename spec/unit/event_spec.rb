@@ -103,7 +103,8 @@ RSpec.describe Event do
     it 'should create messages' do
       @event.create_messages(@records)
       expect(File.open("#{@event_folder}/Ложкин Дмитрий Николаевич.txt").read).to eq(
-        "Ложкин Дмитрий Николаевич\nАдрес: Россия, Москва, ул. Глебовская, д. 3, к. 5, кв. 123\nДобрый день!\n")
+        "Ложкин Дмитрий Николаевич\nАдрес: Россия, Москва, ул. Глебовская, д. 3, к. 5, кв. 123\nДобрый день!\n"
+      )
     end
 
     after do
