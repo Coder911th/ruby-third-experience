@@ -1,6 +1,6 @@
 require 'constants'
 
-RSpec.describe 'the record editing', type: :feature do
+RSpec.describe 'the record removing', type: :feature do
   before do
     File.open(Constants::PATH_TO_DATABASE, 'w') do |file|
       file << 'Ложкин Дмитрий Николаевич,+7 (911) 453-22-30,' \
@@ -8,12 +8,10 @@ RSpec.describe 'the record editing', type: :feature do
     end
   end
 
-  it 'should edit first record' do
+  it 'should remove all records' do
     visit('/')
-    find('[href^="edit/0"]').click
-    fill_in('phone', with: '00-00-00')
-    click_on('Сохранить')
-    expect(page).to have_content('00-00-00')
+    find('[href^="remove/0"]').click
+    expect(page).to have_content('Нет ни одной записи')
   end
 
   after do
