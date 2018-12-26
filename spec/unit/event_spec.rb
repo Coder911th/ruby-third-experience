@@ -108,7 +108,7 @@ RSpec.describe Event do
     end
 
     after do
-      FileUtils.rm_rf(@event_folder) if File.exist?(@event_folder)
+      # FileUtils.rm_rf(@event_folder) if File.exist?(@event_folder)
     end
   end
 end
