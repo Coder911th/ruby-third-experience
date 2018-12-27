@@ -1,3 +1,13 @@
+#export PATH="$PATH:/home/student/Рабочий стол/ruby-third-experience-master/drivers/"
+
+#config.before(:suite, type: :feature) do
+#    ENV['RACK_ENV'] = 'test'
+#    require_relative '../app'
+#    Capybara.app = Sinatra::Application
+#    Capybara.default_driver = :selenium
+#    driver = Selenium::WebDriver.for :firefox
+#  end
+
 require_relative 'validators'
 
 Record = Struct.new(:full_name, :mobile, :phone, :address, :status) do
